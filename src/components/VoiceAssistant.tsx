@@ -4,8 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Mic, MicOff } from "lucide-react";
 import Character from "./Character";
 import { InferenceClient } from "@huggingface/inference";
+import useChat from "@/hooks/useChat";
 
-// Définition des types pour la Web Speech API
 interface SpeechRecognitionEvent extends Event {
   resultIndex: number;
   results: SpeechRecognitionResultList;
@@ -45,10 +45,20 @@ interface SpeechRecognition extends EventTarget {
 }
 
 interface SpeechRecognitionConstructor {
-  new (): SpeechRecognition;
+  new(): SpeechRecognition;
 }
 
 const VoiceAssistant: React.FC = () => {
+  const {
+    messages,
+    input,
+    isLoading,
+    chatContainerRef,
+    setInput,
+    sendMessage,
+    handleKeyPress,
+  } = useChat();
+
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [assistantMessage, setAssistantMessage] = useState(
@@ -56,11 +66,8 @@ const VoiceAssistant: React.FC = () => {
   );
   const recognitionRef = useRef<SpeechRecognition | null>(null);
 
-  // Crée une instance du client Hugging Face
-  const client = new InferenceClient("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");  // Remplace par ta clé API Hugging Face
 
   const cleanTextForSpeech = (text: string) => {
-    // Remplacer les caractères spéciaux comme les astérisques (**) et les tirets (-) par des espaces ou les supprimer
     let cleanedText = text.replace(/\*\*/g, ""); // Supprime les ** 
     cleanedText = cleanedText.replace(/-/g, " "); // Remplace les - par un espace
     return cleanedText;
@@ -144,30 +151,17 @@ const VoiceAssistant: React.FC = () => {
     }
   };
 
-  // Fonction de réponse de l'assistant en utilisant l'API Hugging Face
   const respondToSpeech = async (text: string) => {
     const lowerText = text.toLowerCase();
-    let response = "C'est une question intéressante ! J'apprends encore beaucoup de choses.";
+
+    setInput(lowerText);
+    sendMessage()
+    const response = messages[messages.length - 1].text;
+
+    console.log("Réponse de l'API Hugging Face:", response);
+    
 
     try {
-      const chatCompletion = await client.chatCompletion({
-        provider: "nebius",
-        model: "deepseek-ai/DeepSeek-V3-0324",  // Modèle Hugging Face que tu veux utiliser
-        messages: [
-          {
-            role: "user",
-            content: text,
-          },
-        ],
-        max_tokens: 500,
-      });
-
-      if (chatCompletion.choices && chatCompletion.choices[0]) {
-        response = chatCompletion.choices[0].message.content;
-      } else {
-        response = "Je n'ai pas pu trouver une réponse appropriée.";
-      }
-
       setAssistantMessage(response);
       speak(response);
 
@@ -187,9 +181,8 @@ const VoiceAssistant: React.FC = () => {
           <div className="flex flex-col items-center">
             <Button
               onClick={toggleListening}
-              className={`rounded-full p-6 transition-colors ${
-                isListening ? "bg-kid-red hover:bg-red-700" : "bg-kid-purple hover:bg-purple-700"
-              }`}
+              className={`rounded-full p-6 transition-colors ${isListening ? "bg-kid-red hover:bg-red-700" : "bg-kid-purple hover:bg-purple-700"
+                }`}
             >
               {isListening ? <MicOff className="h-8 w-8 text-white" /> : <Mic className="h-8 w-8 text-white" />}
             </Button>
@@ -210,7 +203,6 @@ const VoiceAssistant: React.FC = () => {
   );
 };
 
-// Déclaration globale pour SpeechRecognition
 declare global {
   interface Window {
     SpeechRecognition: SpeechRecognitionConstructor;

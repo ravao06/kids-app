@@ -4,6 +4,7 @@ import Character from "@/components/Character";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useMessageStore } from '../store/messageStore';
+import { Send } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -80,10 +81,10 @@ const Index = () => {
               onChange={(e) => setMessage(e.target.value)}
             />
             <button
-              className="absolute right-4 bottom-10 text-blue-500"
+              className="absolute right-4 bottom-10 text-blue-500 bg-kid-blue hover:bg-kid-blue-600 text-white rounded-lg px-4 py-2 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed transition-colors "
               onClick={handleClick}
             >
-              📤
+              <Send className="w-5 h-5" />
             </button>
           </div>
 

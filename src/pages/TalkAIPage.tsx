@@ -5,22 +5,23 @@ import { Link } from "react-router-dom";
 import { useMessageStore } from "@/store/messageStore";
 import { useEffect, useState } from "react";
 function TalkAIPage() {
-   const message  = useMessageStore(state=>state.message)
-   const [loading, setLoading] = useState(false)
-   const {
-     messages,
-     input,
-     isLoading,
-     chatContainerRef,
-     setInput,
-     sendMessage,
-     handleKeyPress,
-    } = useChat();
-    
-    useEffect(() => {
-      setInput(message)
-      sendMessage()
-     }, [message ,loading]);
+  const message = useMessageStore((state) => state.message);
+  const [loading, setLoading] = useState(false);
+  const {
+    messages,
+    input,
+    isLoading,
+    chatContainerRef,
+    setInput,
+    sendMessage,
+    handleKeyPress,
+  } = useChat();
+
+  useEffect(() => {
+    setInput(message);
+    sendMessage();
+    setLoading(true);
+  }, [message, loading]);
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header />
@@ -66,7 +67,9 @@ function TalkAIPage() {
                   }`}
                 >
                   {message.sender === "user" ? (
-                    <User className="w-5 h-5 text-white" />
+                    <div className="rounded-full bg-gradient-to-r from-kid-blue via-kid-purple to-kid-pink p-1 flex items-center justify-center">
+                      <span className="text-xl font-bold text-white">👶</span>
+                    </div>
                   ) : (
                     <Bot className="w-5 h-5 text-white" />
                   )}
