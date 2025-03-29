@@ -20,7 +20,7 @@ const DrawingPage = () => {
           </Link>
           
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-2 text-gray-800">Reconnaissance de dessins</h1>
+            <h1 className="text-3xl font-bold mb-2 text-gray-800">Lecture de dessins</h1>
             <p className="text-gray-600">Dessine quelque chose et je devinerai ce que c'est !</p>
           </div>
           
