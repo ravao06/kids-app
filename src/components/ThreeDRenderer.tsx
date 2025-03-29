@@ -80,11 +80,9 @@ const ThreeDRenderer: React.FC<ThreeDRendererProps> = ({ modelType }) => {
     };
   }, []);
 
-  // Update 3D model based on recognition
   useEffect(() => {
     if (!sceneRef.current) return;
     
-    // Remove previous object if exists
     if (objectRef.current) {
       sceneRef.current.remove(objectRef.current);
       objectRef.current = null;
@@ -92,15 +90,12 @@ const ThreeDRenderer: React.FC<ThreeDRendererProps> = ({ modelType }) => {
     
     if (!modelType) return;
     
-    // Create new object based on recognized type
-    const color = new THREE.Color(0x8B5CF6); // Purple color
+    const color = new THREE.Color(0x8B5CF6); 
     
     switch(modelType.toLowerCase()) {
       case 'maison': {
-        // Create a house group
         const houseGroup = new THREE.Group();
         
-        // House body (cube)
         const houseBody = new THREE.Mesh(
           new THREE.BoxGeometry(2, 1.5, 2),
           new THREE.MeshPhongMaterial({ color: new THREE.Color(0x8B5CF6) })
@@ -108,16 +103,14 @@ const ThreeDRenderer: React.FC<ThreeDRendererProps> = ({ modelType }) => {
         houseBody.position.y = -0.25;
         houseGroup.add(houseBody);
         
-        // Roof (pyramid)
         const roof = new THREE.Mesh(
           new THREE.ConeGeometry(1.5, 1, 4),
           new THREE.MeshPhongMaterial({ color: new THREE.Color(0x6D28D9) })
         );
         roof.position.y = 1;
-        roof.rotation.y = Math.PI / 4; // Rotate to align with house
+        roof.rotation.y = Math.PI / 4; 
         houseGroup.add(roof);
         
-        // Door
         const door = new THREE.Mesh(
           new THREE.PlaneGeometry(0.5, 0.8),
           new THREE.MeshPhongMaterial({ color: new THREE.Color(0x4C1D95) })
@@ -125,7 +118,6 @@ const ThreeDRenderer: React.FC<ThreeDRendererProps> = ({ modelType }) => {
         door.position.set(0, -0.35, 1.01);
         houseGroup.add(door);
         
-        // Windows
         const windowMaterial = new THREE.MeshPhongMaterial({ color: new THREE.Color(0xC4B5FD) });
         
         const window1 = new THREE.Mesh(

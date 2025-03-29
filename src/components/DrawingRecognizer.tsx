@@ -14,11 +14,9 @@ const DrawingRecognizer: React.FC = () => {
   const handleDrawingComplete = async (imageData: string) => {
     setIsLoading(true);
     try {
-      // Utilisation de la reconnaissance réelle avec le modèle Teachable Machine
       const result = await drawingRecognitionService.recognizeDrawing(imageData);
       setRecognizedObject(result);
       
-      // Annonce du résultat avec la voix
       voiceService.announceRecognition(result);
     } catch (error) {
       console.error('Error recognizing drawing:', error);
@@ -36,7 +34,7 @@ const DrawingRecognizer: React.FC = () => {
           <CardHeader>
             <CardTitle>Dessinez ici!</CardTitle>
             <CardDescription>
-              Dessinez une forme simple (cercle, carré, étoile, etc.)
+              Dessinez une forme simple (cercle, carré, étoile, etc ...)
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -55,7 +53,7 @@ const DrawingRecognizer: React.FC = () => {
                   : "Dessinez quelque chose pour voir le résultat en 3D"}
             </CardDescription>
           </CardHeader>
-          <CardContent className="h-[300px] flex items-center justify-center">
+          <CardContent  className="h-[300px] border-2 border-gray-300 flex items-center justify-center">
             {isLoading ? (
               <div className="flex flex-col items-center justify-center">
                 <span className="loader mb-2"></span>

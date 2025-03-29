@@ -113,20 +113,21 @@ const DrawingCanvas: React.FC<DrawingCanvasProps> = ({ onDrawingComplete }) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      <div className="relative border-2 border-gray-300 rounded-lg overflow-hidden bg-white">
-        <canvas
-          ref={canvasRef}
-          onMouseDown={startDrawing}
-          onMouseMove={draw}
-          onMouseUp={stopDrawing}
-          onMouseLeave={stopDrawing}
-          onTouchStart={startDrawing}
-          onTouchMove={draw}
-          onTouchEnd={stopDrawing}
-          className="bg-white cursor-crosshair touch-none"
-        />
-      </div>
+    <div className="flex flex-col items-center gap-4 ">
+      <div className="relative border-2 border-gray-300 rounded-lg overflow-hidden bg-white w-[200px] h-[200px]">
+  <canvas
+    ref={canvasRef}
+    onMouseDown={startDrawing}
+    onMouseMove={draw}
+    onMouseUp={stopDrawing}
+    onMouseLeave={stopDrawing}
+    onTouchStart={startDrawing}
+    onTouchMove={draw}
+    onTouchEnd={stopDrawing}
+    className="bg-white cursor-crosshair touch-none w-full h-full"
+  />
+</div>
+
       <div className="flex gap-4">
         <Button 
           variant="outline" 

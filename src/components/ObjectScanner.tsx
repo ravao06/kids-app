@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Upload, Image as ImageIcon } from "lucide-react";
 import * as tf from '@tensorflow/tfjs';
 import * as cocoSsd from '@tensorflow-models/coco-ssd';
+import Character from './Character';
 
 interface ScanResult {
   className: string;
@@ -156,6 +157,7 @@ const ObjectScanner: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center gap-6 w-full max-w-md mx-auto">
+      <Character message={""} />
       <div className="relative w-full aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden border-4 border-kid-blue">
         {selectedImage ? (
           <div className="relative w-full h-full">
@@ -204,21 +206,21 @@ const ObjectScanner: React.FC = () => {
           </div>
         </label>
         
+        <Button 
+          className="bg-kid-blue hover:bg-green-700 text-white" 
+          onClick={captureImageFromVideo} 
+          disabled={isScanning || !videoRef.current}
+        >
+          Capture de l'image
+        </Button>
         <Button
-          className="bg-kid-blue hover:bg-blue-700 text-white"
+          className="bg-gradient-to-r from-kid-blue via-kid-purple to-kid-pink hover:bg-blue-700 text-white"
           onClick={startWebcam}
           disabled={isModelLoading}
         >
           Activer la webcam
         </Button>
 
-        <Button 
-          className="bg-kid-green hover:bg-green-700 text-white" 
-          onClick={captureImageFromVideo} 
-          disabled={isScanning || !videoRef.current}
-        >
-          Capture de l'image
-        </Button>
 
         {selectedImage && (
           <Button 
