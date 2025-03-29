@@ -72,7 +72,7 @@ const Index = () => {
         <div className="w-full max-w-7xl">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold mb-2 text-gray-800" data-aos="fade-up">
-              Bienvenue sur Koto AI !
+              Bienvenue sur Kiki AI !
             </h1>
             <p className="text-xl text-gray-600" data-aos="fade-up" data-aos-delay="200">
               Un monde d'apprentissage t'attend !
@@ -80,7 +80,7 @@ const Index = () => {
           </div>
 
           <div className="flex justify-center mb-12" data-aos="zoom-out"  >
-            <Character message="Salut ! Je suis Koto, ton compagnon d'exploration. Que veux-tu faire aujourd'hui ?" />
+            <Character message="Salut ! Je suis Kiki, ton compagnon d'exploration. Que veux-tu faire aujourd'hui ?" />
           </div>
           <div className="w-full max-w-7xl relative">
             <textarea
@@ -116,7 +116,7 @@ const Index = () => {
       </main>
 
       <footer className="py-6 text-center text-gray-500 bg-white">
-        <p>Koto AI - Apprends en t'amusant !</p>
+        <p>Kiki AI - Apprends en t'amusant !</p>
       </footer>
     </div>
   );

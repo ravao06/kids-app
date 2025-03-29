@@ -60,11 +60,14 @@ const VoiceAssistant: React.FC = () => {
   const client = new InferenceClient(import.meta.env.VITE_HF_API_KEY);  
 
   const cleanTextForSpeech = (text: string) => {
-    // Remplacer les caractères spéciaux comme les astérisques (**) et les tirets (-) par des espaces ou les supprimer
-    let cleanedText = text.replace(/\*\*/g, ""); // Supprime les ** 
-    cleanedText = cleanedText.replace(/-/g, " "); // Remplace les - par un espace
+    // Supprime les ** et remplace les - par un espace
+    let cleanedText = text.replace(/\*\*/g, "").replace(/-/g, " ");
+
+    // Supprime tous les emojis
+    cleanedText = cleanedText.replace(/[\p{Emoji}]/gu, "");
+
     return cleanedText;
-  };
+};
 
   // Fonction pour faire parler l'assistant
   const speak = (text: string) => {
@@ -81,8 +84,8 @@ const VoiceAssistant: React.FC = () => {
   useEffect(() => {
     if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
       const SpeechRecognitionAPI =
-        (window as any).SpeechRecognition ||
-        (window as any).webkitSpeechRecognition;
+        (window ).SpeechRecognition ||
+        (window ).webkitSpeechRecognition;
       recognitionRef.current = new SpeechRecognitionAPI();
 
       if (recognitionRef.current) {
