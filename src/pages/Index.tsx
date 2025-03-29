@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useMessageStore } from '../store/messageStore';
 import { Send } from "lucide-react";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 
 const Index = () => {
   const navigate = useNavigate();
@@ -16,6 +20,11 @@ const Index = () => {
     setMessageStore(message)
     navigate("/talk-bot");
   };
+
+  useEffect(() => {
+    AOS.init({ duration: 2000, once: true });
+  }, []);
+  
   const activities = [
     {
       title: "Scanner d'objets",
@@ -62,16 +71,16 @@ const Index = () => {
       <main className="flex-1 p-6 flex flex-col items-center">
         <div className="w-full max-w-7xl">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-2 text-gray-800">
-              Bienvenue sur AI Kid Explorer !
+            <h1 className="text-4xl font-bold mb-2 text-gray-800" data-aos="fade-up">
+              Bienvenue sur Koto AI !
             </h1>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600" data-aos="fade-up" data-aos-delay="200">
               Un monde d'apprentissage t'attend !
             </p>
           </div>
 
-          <div className="flex justify-center mb-12">
-            <Character message="Salut ! Je suis Robo, ton compagnon d'exploration. Que veux-tu faire aujourd'hui ?" />
+          <div className="flex justify-center mb-12" data-aos="zoom-out"  >
+            <Character message="Salut ! Je suis Koto, ton compagnon d'exploration. Que veux-tu faire aujourd'hui ?" />
           </div>
           <div className="w-full max-w-7xl relative">
             <textarea
@@ -90,7 +99,8 @@ const Index = () => {
 
           <h2 className="text-2xl font-bold mb-6 text-gray-800">Activités</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4" data-aos="fade-up"
+     data-aos-duration="3000">
             {activities.map((activity, index) => (
               <ActivityCard
                 key={index}
@@ -106,7 +116,7 @@ const Index = () => {
       </main>
 
       <footer className="py-6 text-center text-gray-500 bg-white">
-        <p>AI Kid Explorer - Apprends en t'amusant !</p>
+        <p>Koto AI - Apprends en t'amusant !</p>
       </footer>
     </div>
   );
