@@ -3,41 +3,55 @@ import fruitsData from "../fruitsData";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Loader2 } from "lucide-react";
-import { Link } from "react-router-dom";
 import Character from "@/components/Character";
 import useChat from "@/hooks/useChat";
+import Backdrop from '@mui/material/Backdrop';
+import { CircularProgress } from "@mui/material";
 const FruitListPage = () => {
   const { setInput, sendMessage, messages, isLoading, input } = useChat();
   const [selectedFruit, setSelectedFruit] = useState(null);
   const [fruitName, setFruitName] = useState("");
   const [load, setLoad] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleFruitClick = async (fruit) => {
+    setOpen(true);
     setSelectedFruit(fruit);
-    setInput( `Donne-moi une description du fruit ${fruit.name} en français en 30 mots max.`);
+    setInput(
+      `Donne-moi une description du fruit ${fruit.name} en français en 30 mots max.`
+    );
     await sendMessage();
     setFruitName(fruit.name);
     setLoad(true);
     console.log(fruit.name);
   };
-  
+
   useEffect(() => {
     if (input) {
       sendMessage().then(() => {
+        setOpen(false);
         setShowModal(true);
-        setLoad(false);
       });
     }
   }, [input]);
 
   const handleCloseModal = () => {
+    // setOpen(false);
     setShowModal(false);
   };
-
+  // if (showModal) {
+  //  setOpen(false);
+  // }
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      
+      <Backdrop
+        sx={(theme) => ({ color: "#fff", zIndex: theme.zIndex.drawer + 1 })}
+        open={open}
+        // onClick={handleClose}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Header />
       <main className="flex-1 p-6 flex flex-col items-center">
         <div className="w-full max-w-7xl">

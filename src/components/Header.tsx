@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   return (
@@ -8,9 +8,11 @@ const Header: React.FC = () => {
         <div className="rounded-full bg-kid-purple p-2 flex items-center justify-center">
           <span className="text-2xl font-bold text-white">🤖</span>
         </div>
+       <Link to="/" >
         <h1 className="text-2xl font-bold bg-gradient-to-r from-kid-blue via-kid-purple to-kid-pink text-transparent bg-clip-text">
           Kiki AI
         </h1>
+       </Link>
       </div>
       <div className="flex items-center gap-4">
         {/* <Button variant="ghost" className="text-kid-blue hover:text-kid-purple hover:bg-blue-50">
