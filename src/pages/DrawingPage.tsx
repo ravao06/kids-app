@@ -13,11 +13,11 @@ const DrawingPage = () => {
       
       <main className="flex-1 p-6 flex flex-col items-center">
         <div className="w-full max-w-4xl">
-        <Link to="/">
+        {/* <Link to="/">
             <button className="bg-kid-blue hover:bg-kid-blue-600 text-white rounded-lg px-4 py-2 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
               <ArrowLeft className="w-5 h-5" />
             </button>
-          </Link>
+          </Link> */}
           
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold mb-2 text-gray-800">Lecture de dessins</h1>

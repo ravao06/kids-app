@@ -205,11 +205,11 @@ const StoriesPage = () => {
       <div className="min-h-screen bg-gray-50 flex flex-col">
         <main className="flex-1 p-6 flex flex-col items-center">
         <div className="w-full max-w-7xl">
-          <Link to="/">
+          {/* <Link to="/">
             <button className="bg-kid-blue hover:bg-kid-blue-600 text-white rounded-lg px-4 py-2 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
               <ArrowLeft className="w-5 h-5" />
             </button>
-          </Link>
+          </Link> */}
         </div>
           <div className="w-full max-w-4xl">
             <div className="text-center mb-8">
